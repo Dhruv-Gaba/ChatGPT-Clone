@@ -1,0 +1,239 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    font-family: "poppins",sans-serif;
+}
+
+:root{
+    --text-color:#ffffff;
+    --icon-color:#acacbe;
+    --icon-hover-bg:#5b5e71;
+    --placeholder-color:#cccccc;
+    --outgoing-chat-bg:#343541;
+    --incoming-chat-bg:#444654;
+    --outgoing-chat-border:#343541;
+    --incoming-chat-border:#444654;
+}
+
+.light-mode{
+    --text-color:#343541;
+    --icon-color:#a9a9bc;
+    --icon-hover-bg:#f1f1f3;
+    --placeholder-color:#9f9f9f;
+    --outgoing-chat-bg:#ffffff;
+    --incoming-chat-bg:#f7f7f8;
+    --outgoing-chat-border:#ffffff;
+    --incoming-chat-border:#d9d9e3;
+}
+
+body{
+    background-color:var(--outgoing-chat-bg)
+}
+
+.chat-container{
+    max-height:100vh;
+    padding-bottom:150px;
+    overflow-y:auto;
+}
+
+.default-text{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    height:70vh;
+    padding:0 10px;
+    text-align: center;
+    color:var(--text-color);
+}
+
+.default-text h1{
+    font-size: 3.3rem;
+}
+
+.default-text p{
+    margin-top:10px;
+    font-size:1.1rem;
+}
+
+:where(.chat-container,textarea)::-webkit-scrollbar{
+    width:6px;
+}
+
+:where(.chat-container,textarea)::-webkit-scrollbar-track{
+    background-color: var(--incoming-chat-bg);
+    border-radius:25px;
+}
+
+:where(.chat-container,textarea)::-webkit-scrollbar-thumb{
+    background-color: var(--icon-color);
+    border-radius:25px;
+}
+
+.chat-container .chat{
+    color:var(--text-color);
+    padding:25px 10px;
+    display:flex;
+    justify-content:center;
+}
+
+.chat-container .outgoing{
+    background-color:var(--outgoing-chat-bg);
+    border:1px solid var(--outgoing-chat-border);
+}
+
+.chat-container .incoming{
+    background-color:var(--incoming-chat-bg);
+    border:1px solid var(--incoming-chat-border);
+}
+
+.chat .chat-details{
+    display:flex;
+    align-items:center;
+}
+
+.chat .chat-details img{
+    width:35px;
+    height:35px;
+    object-fit:cover;
+    border-radius:2px;
+    align-self:flex-start;
+}
+
+.chat .chat-content{
+    display:flex;
+    align-items:flex-start;
+    justify-content: space-between;
+    max-width:1200px;
+    width:100%;
+}
+
+.chat .chat-details p{
+    font-size:1.05rem;
+    padding:0 50px 0 25px;
+    white-space: pre-wrap; /*The CSS property `white-space: pre-wrap;` specifies that whitespace in the element should be preserved, and text should wrap when necessary to prevent overflow. This means that any spaces, tabs, or line breaks in the text content of the element will be displayed as-is, and the text will wrap to the next line if it exceeds the width of the container.*/
+}
+
+.chat .chat-details p.error{
+    color:#e55865;
+}
+
+span.material-symbols-outlined{
+    cursor:pointer;
+    user-select: none;  /*The CSS property user-select: none; prevents users from selecting text within an element. This means that when applied to an element, such as a <div> or a <span>, users will not be able to highlight or select any text contained within that element. It's commonly used to prevent accidental selection of text in certain UI elements like buttons, icons, or images where text selection is not intended or desired. */
+}
+
+.chat .chat-content span{
+    font-size:1.3rem;
+    color:var(--icon-color);
+    visibility:hidden;
+}
+
+.chat:hover .chat-content:not(:has(.typing-animation, .error)) span{
+    visibility:visible;
+}
+
+.typing-animation{
+    display:inline-flex;
+    padding-left:25px;
+}
+
+.typing-animation .typing-dot{
+    height:7px;
+    width:7px;
+    opacity:0.7;
+    margin:0 3px;
+    border-radius:50%;
+    background-color: var(--text-color);
+    animation:animateDots 1.5s var(--delay) ease-in-out infinite;
+}
+
+@keyframes animateDots{
+    0%,44%{
+        transform:translateY(0px);
+    }
+    22%{
+        opacity:0.4;
+        transform:translateY(-6px);
+    }
+    44%{
+        opacity:0.2;
+    }
+}
+
+/* typing-container-styling */
+.typing-container{
+    position:fixed;
+    bottom:0;
+    width:100%;
+    display:flex;
+    padding:20px 10px;
+    justify-content:center;
+    background-color: var(--outgoing-chat-bg);
+    border:1px solid var(--incoming-chat-border);
+}
+
+.typing-container .typing-content{
+    max-width:950px;
+    width:100%;
+    display:flex;
+    align-items:flex-end;
+}
+
+.typing-content .typing-textarea{
+    width:100%;
+    display:flex;
+    position:relative;
+}
+
+.typing-textarea textarea{
+    width:100%;
+    height:55px;
+    border:none;
+    resize:none;
+    max-height: 250px;
+    overflow-y: auto;
+    font-size:1rem;
+    border-radius:4px;
+    color:var(--text-color);
+    padding:15px 45px 15px 20px;
+    background-color:var(--incoming-chat-bg);
+    outline:1px solid var(--incoming-chat-border);
+}
+
+.typing-textarea textarea::placeholder{
+    color:var(--placeholder-color);
+}
+
+.typing-textarea span{
+    position:absolute;
+    right:0;
+    bottom:0;
+    visibility: hidden;
+}
+
+.typing-textarea textarea:valid ~span{
+    visibility:visible;
+}
+
+.typing-content span{
+    height:55px;
+    width:55px;
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    color:var(--icon-color);
+}
+
+.typing-controls{
+    display:flex;
+}
+
+.typing-controls span{
+    margin-left:7px;
+    font-size:1.4rem;
+    border-radius:4px;
+    background-color: var(--incoming-chat-bg);
+    border:1px solid var(--incoming-chat-border);
+}
