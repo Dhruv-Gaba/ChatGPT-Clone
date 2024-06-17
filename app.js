@@ -70,8 +70,8 @@ const handleOutgoingChat=()=>{
 }
 sendBtn.addEventListener("click",handleOutgoingChat);
 
-
-const API_KEY = "AIzaSyAGf45yP9wsnAg95TdD59ZbxtMvgNSZ1Nk";
+//ENTER YOUR GEMINI AI API KEY HERE
+const API_KEY = "";
   
 // Access your API key
 const genAI = new GoogleGenerativeAI(API_KEY);
